@@ -1,9 +1,9 @@
 import React from 'react'
 
-function LoginContractor() {
+function ContractorLogin() {
   return (
     <div>LoginContractor</div>
   )
 }
 
-export default LoginContractor
+export default ContractorLogin

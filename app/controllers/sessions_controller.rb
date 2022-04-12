@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create_client, :create_contractor]
 
     def create_client
         client = Client.find_by(email: params[:email])

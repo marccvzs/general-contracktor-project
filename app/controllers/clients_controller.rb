@@ -6,6 +6,15 @@ class ClientsController < ApplicationController
         render json: client, status: :created
     end
 
+    def show 
+        client = Client.find(id: session[:client_id])
+        render json: client, status: :ok 
+    end
+
+    def update 
+        client = Client.find(id: session[:client_id])
+    end
+
     private
 
     def client_params

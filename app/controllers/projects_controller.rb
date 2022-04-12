@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
-    before_action :authorize
-
+    skip_before_action :authorize, only: :index
+    
     def index
         projects = Project.all
         render json: projects, status: :ok

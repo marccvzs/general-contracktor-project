@@ -10,11 +10,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get "/me/client/:id", to: "client#show"
-  get "/me/contractor/:id", to: "contractor#show"
+  get "/me/client/:id", to: "clients#show"
+  get "/me/contractor/:id", to: "contractors#show"
 
-  get "/projects/:id", to: ""
-
+  post "/signup/client", to: "clients#create"
+  post "/signup/contractor", to: "contractors#create"
   post "/login/client", to: "sessions#create_client"
   post "/login/contractor", to: "sessions#create_contractor"
 

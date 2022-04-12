@@ -5,8 +5,12 @@ import Home from './Home';
 import NavBar from './NavBar';
 import Projects from './Projects';
 import Tasks from './Tasks';
+import NoteForm from './NoteForm';
 import Login from './Login';
-import Signup from './Signup';
+import ClientLogin from './ClientLogin';
+import ContractorLogin from './ContractorLogin';
+import ClientSignup from './ClientSignup';
+import ContractorSignup from './ContractorSignup';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,11 +33,23 @@ function App() {
     <div className="bg-slate-600 h-screen grid grid-cols-3 gap-4 grid-rows-3">
       <NavBar />
       <Switch>
-        <Route path="/signup">
-          <Signup />
+        <Route exact path="/signup/client">
+          <ClientSignup />
         </Route>
-        <Route path="/login">
+        <Route exact path="/signup/contractor">
+          <ContractorSignup />
+        </Route>
+        <Route exact path="/login/client">
+          <ClientLogin onLogin={setUser} />
+        </Route>
+        <Route exact path="/login/contractor">
+          <ContractorLogin />
+        </Route>
+        <Route exact path="/login">
           <Login />
+        </Route>
+        <Route path="/note/new">
+          <NoteForm />
         </Route>
         <Route exact path="/">
           {loggedIn ? <Redirect to="/login" /> : <Home user={user} />}

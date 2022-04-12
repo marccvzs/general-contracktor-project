@@ -17,7 +17,6 @@ Room.destroy_all
 
 puts "🌱 Seeding Clients..."
 5.times do
-    
     Client.create(
         name: Faker::Name.name,
         address: Faker::Address.street_address,
