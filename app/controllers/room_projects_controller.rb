@@ -1,2 +1,0 @@
-class RoomProjectsController < ApplicationController
-end

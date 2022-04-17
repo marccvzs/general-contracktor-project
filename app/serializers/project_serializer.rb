@@ -1,5 +1,4 @@
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :budget, :num_rooms
-  has_one :contractor
+  attributes :id, :name, :description, :num_rooms, :budget, :address
   has_one :client
 end

@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Home from './Home';
+import ClientHome from './ClientHome';
 import NavBar from './NavBar';
-import Projects from './Projects';
-import Tasks from './Tasks';
-import NoteForm from './NoteForm';
-import Login from './Login';
+import ProjectForm from './ProjectForm';
 import ClientLogin from './ClientLogin';
-import ContractorLogin from './ContractorLogin';
 import ClientSignup from './ClientSignup';
-import ContractorSignup from './ContractorSignup';
 
 function App() {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('/me')
+    fetch("/client/me")
     .then(r => {
       if (r.ok) {
         r.json()
@@ -29,30 +24,25 @@ function App() {
     });
   }, []);
 
+  if (!user) return <ClientLogin onLogin={setLoggedIn} onSetUser={setUser} />
   return (
-    <div className="bg-slate-600 h-screen grid grid-cols-3 gap-4 grid-rows-3">
-      <NavBar />
+    <div className="bg-gradient-to-br from-amber-300 to-amber-500 h-screen">
+      <NavBar loggedIn={loggedIn} onLogout={setLoggedIn}/>
       <Switch>
-        <Route exact path="/signup/client">
-          <ClientSignup />
+        <Route path="/client/signup">
+          <ClientSignup onLogin={setUser} />
         </Route>
-        <Route exact path="/signup/contractor">
-          <ContractorSignup />
+        {/* <Route path="/client/login">
+          <ClientLogin onLogin={setLoggedIn} onSetUser={setUser}/>
+        </Route> */}
+        <Route path="/project/new">
+          <ProjectForm user={user}/>
         </Route>
-        <Route exact path="/login/client">
-          <ClientLogin onLogin={setUser} />
-        </Route>
-        <Route exact path="/login/contractor">
-          <ContractorLogin />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route path="/note/new">
-          <NoteForm />
-        </Route>
+        {/* <Route path="/home">
+          <ClientHome user={user} />
+        </Route> */}
         <Route exact path="/">
-          {loggedIn ? <Redirect to="/login" /> : <Home user={user} />}
+        <ClientHome user={user} />
         </Route>
       </Switch>
     </div>

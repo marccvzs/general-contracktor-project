@@ -1,5 +1,4 @@
 class Room < ApplicationRecord
     has_many :room_imgs
-    has_many :room_projects
-    has_many :project_tasks
+    # has_many :room_projects
 end

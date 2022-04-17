@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
+import Errors from './Errors';
 
-function ClientSignup() {
+function ClientSignup({ onLogin, onSetUser }) {
+  const [errors, setErrors] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    address: '',
-    budget: '',
     email: '',
+    address: '',
     password: '',
     password_confirmation: '',
   })
 
   function handleChange(e) {
     const value = e.target.value;
-    const name = e.target.name;
+    const name = e.target.name
 
     setFormData({
       ...formData,
@@ -22,8 +24,7 @@ function ClientSignup() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    fetch('/signup/client', {
+    fetch("/clients", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,21 +33,32 @@ function ClientSignup() {
         email: formData.email,
         name: formData.name,
         address: formData.address,
-        budget: formData.budget,
         password: formData.password,
-        password_confirmation: formData.password_confrimation,
-      })
+        password_confirmation: formData.password_confirmation,
+      }),
     })
-    .then(r => r.json())
-    .then(user => console.log(user))
-    
-  }
+    .then(r => {
+      setIsLoading(false);
+      if (r.ok) {
+        r.json()
+        .then(user => {
+          onLogin(true)
+          onSetUser(user)
+        });
+      } else {
+      r.json()
+      .then(err => setErrors(err.errors));
+    }
+  });
+}
+  
 
   return (
-    <div className="my-auto">
+    <div className="flex flex-wrap mt-20 justify-center">
       <form onSubmit={handleSubmit}>
-        <div className="m-3">
+        <div>
           <input
+          className="m-2"
           type="text"
           placeholder="Name..."
           name="name"
@@ -54,35 +66,29 @@ function ClientSignup() {
           onChange={handleChange}
           />
         </div>
-        <div className="m-3">
-          <input
-          type="text"
+        <div>
+          <input 
+          className="m-2"
+          type="email"
           placeholder="Email..."
           name="email"
           value={formData.email}
           onChange={handleChange}
           />
         </div>
-        <div className="m-3">
+        <div>
           <input
+          className="m-2"
           type="text"
-          placeholder="Address"
+          placeholder="Address.."
           name="address"
           value={formData.address}
           onChange={handleChange}
           />
         </div>
-        <div className="m-3">
+        <div>
           <input
-          type="text"
-          placeholder="What's Your Budget..."
-          name="budget"
-          value={formData.budget}
-          onChange={handleChange}
-          />
-        </div>
-        <div className="m-3">
-          <input
+          className="m-2"
           type="password"
           placeholder="Password..."
           name="password"
@@ -90,19 +96,23 @@ function ClientSignup() {
           onChange={handleChange}
           />
         </div>
-        <div className="m-3">
+        <div>
           <input
+          className="m-2"
           type="password"
           placeholder="Confirm Password..."
           name="password_confirmation"
-          value={formData.password_confirmaiton}
+          value={formData.password_confirmation}
           onChange={handleChange}
           />
         </div>
-        <button className="m-3 bg-blue-300 hover:bg-blue-600" type="submit">Create Account</button>
+        <div>
+          <button className="bg-slate-400 hover:bg-blue-200 rounded" type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+        </div>
+        <Errors errors={errors} />
       </form>
     </div>
   )
 }
 
-export default ClientSignup
+export default ClientSignup;

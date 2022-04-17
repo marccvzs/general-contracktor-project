@@ -1,20 +1,18 @@
 Rails.application.routes.draw do
-  resources :notes, only: [:create, :show, :destroy]
-  resources :project_tasks, only: [:index, :create, :show, :destroy]
+  # resources :notes, only: [:create, :show, :destroy]
+  # resources :project_tasks, only: [:index, :create, :show, :destroy]
   resources :room_imgs, only: [:create, :show, :destroy]
-  resources :room_projects, only: [:index, :show, :create, :destroy]
-  resources :projects, only: [:index, :show, :create, :destroy]
+  # resources :room_projects, only: [:index, :show, :create, :destroy]
+  resources :projects, only: [:index, :show, :create, :update, :destroy]
   resources :contractors, only: [:create, :show]
   resources :clients, only: [:create, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get "/me/client/:id", to: "clients#show"
-  get "/me/contractor/:id", to: "contractors#show"
+  get "/client/me", to: "clients#show"
+  get "/contractor/me", to: "contractors#show"
 
-  post "/signup/client", to: "clients#create"
-  post "/signup/contractor", to: "contractors#create"
   post "/login/client", to: "sessions#create_client"
   post "/login/contractor", to: "sessions#create_contractor"
 

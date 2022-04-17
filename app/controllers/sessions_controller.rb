@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorize, only: [:create_client, :create_contractor]
+    skip_before_action :authorize, only: :create_client
 
     def create_client
         client = Client.find_by(email: params[:email])
         if client&.authenticate(params[:password])
             session[:client_id] = client.id
-            render json: client, status: :created
+            render json: client
         else
             render json: { error: "Invalid username or password" }, status: :unauthorized
         end
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         contractor = Contractor.find_by(email: params[:email])
         if contractor&.authenticate(params[:password])
             session[:contractor_id] = contractor.id
-            render json: contractor, status: :created
+            render json: contractor
         else
             render json: { error: "Invalid username or password" }, status: :unauthorized
         end

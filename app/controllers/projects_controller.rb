@@ -1,22 +1,30 @@
 class ProjectsController < ApplicationController
-    skip_before_action :authorize, only: :index
     
+    def create
+        project = Project.create!(project_params)
+        render json: project, status: :created
+    end
+
     def index
-        projects = Project.all
+        projects = Project.where(client_id: session[:client_id])
         render json: projects, status: :ok
     end
-    
-    def create 
-        project = Project.params(project_params)
-    end 
+
+    def update
+        project = Project.find(params[:id])
+        project.update(project_params)
+        render json: project, status: :ok
+    end
+
+    def destroy 
+        project = Project.find(params[:id])
+        project.destroy
+        head :no_content
+    end
 
     private 
 
     def project_params
-        params.permit(:name, :contractor_id, :client_id, :num_rooms, :budget)
-    end 
-
-    def authorize
-        render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :client_id || :contractor_id
+        params.permit(:name, :address, :description, :client_id, :budget, :num_rooms)
     end
 end

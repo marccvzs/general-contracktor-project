@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 puts "Deleting seeds..."
-ProjectTaskMaterial.destroy_all
-Material.destroy_all
-ProjectTask.destroy_all
-RoomProject.destroy_all
+# ProjectTaskMaterial.destroy_all
+# Material.destroy_all
+# ProjectTask.destroy_all
+# RoomProject.destroy_all
 Project.destroy_all
 Client.destroy_all
 Contractor.destroy_all
@@ -17,6 +17,7 @@ Room.destroy_all
 
 puts "🌱 Seeding Clients..."
 5.times do
+    
     Client.create(
         name: Faker::Name.name,
         address: Faker::Address.street_address,
@@ -43,8 +44,11 @@ puts "🌱 Seeding Projects..."
     Project.create(
         budget: rand(100..200000),
         num_rooms: rand(1..6),
-        contractor_id: Contractor.ids.sample,
-        client_id: Client.ids.sample
+        name: Faker::Marketing.buzzwords,
+        description: Faker::Lorem.paragraph,
+        address: Faker::Address.street_address,
+        client_id: Client.ids.sample,
+        completed: Faker::Boolean.boolean
     )
 end
 
@@ -64,42 +68,42 @@ Room.create(room: "garage")
 Room.create(room: "outdoor")
 Room.create(room: "gym")
 
-puts "🌱 Seeding Room Projects..."
-10.times do
-    RoomProject.create(
-        name: Faker::Construction.subcontract_category,
-        room_id: Room.ids.sample,
-        project_id: Project.ids.sample,
-    )
-end
+# puts "🌱 Seeding Room Projects..."
+# 10.times do
+#     RoomProject.create(
+#         name: Faker::Construction.subcontract_category,
+#         room_id: Room.ids.sample,
+#         project_id: Project.ids.sample,
+#     )
+# end
 
-puts "🌱 Seeding Materials..."
-10.times do
-    Material.create(
-        price: Faker::Commerce.price,
-        material: Faker::Construction.unique.material,
-    )
-end
+# puts "🌱 Seeding Materials..."
+# 10.times do
+#     Material.create(
+#         price: Faker::Commerce.price,
+#         material: Faker::Construction.unique.material,
+#     )
+# end
 
-puts "🌱 Seeding Project Tasks..."
-10.times do
-    ProjectTask.create(
-        name: Faker::Construction.subcontract_category,
-        completed: Faker::Boolean.boolean,
-        hours: rand(1..72),
-        description: Faker::Lorem.sentence,
-        room_id: Room.ids.sample,
-        project_id: Project.ids.sample,
-    )
-end
+# puts "🌱 Seeding Project Tasks..."
+# 10.times do
+#     ProjectTask.create(
+#         name: Faker::Construction.subcontract_category,
+#         completed: Faker::Boolean.boolean,
+#         hours: rand(1..72),
+#         description: Faker::Lorem.sentence,
+#         room_id: Room.ids.sample,
+#         project_id: Project.ids.sample,
+#     )
+# end
 
-puts "🌱 Seeding Project Task Materials..."
-25.times do
-    ProjectTaskMaterial.create(
-        qty: rand(1..100),
-        material_id: Material.ids.sample,
-        project_task_id: ProjectTask.ids.sample,
-    )
-end
+# puts "🌱 Seeding Project Task Materials..."
+# 25.times do
+#     ProjectTaskMaterial.create(
+#         qty: rand(1..100),
+#         material_id: Material.ids.sample,
+#         project_task_id: ProjectTask.ids.sample,
+#     )
+# end
 
 puts "Done!"
