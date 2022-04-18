@@ -28,7 +28,7 @@ function App() {
   if (!user) return <ClientLogin onLogin={setLoggedIn} onSetUser={setUser} />
   
   return (
-    <div className="bg-gradient-to-br from-amber-300 to-amber-500 h-screen">
+    <div className="bg-kitchen-image bg-cover bg-center w-full h-screen">
       <NavBar loggedIn={loggedIn} onLogout={setUser}/>
       <Switch>
         <Route path="/client/signup">

@@ -4,7 +4,7 @@ function Profile({ user }) {
     const { name, address, budget, email, projects } = user
     console.log(user)
   return (
-    <div className="bg-stone-300 items-center px-20 m-1 rounded-xl border-2 border-stone-700 shadow-lg">
+    <div className="bg-[#7f884a]/80 items-center px-20 m-1 rounded-xl border-2 border-stone-700 shadow-lg">
       <div className="text-center ">
         <label>Your Name: </label>
         <h1 className="text-2xl font-bold">{name}</h1>

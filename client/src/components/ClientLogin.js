@@ -46,9 +46,9 @@ function ClientLogin({ onLogin, onSetUser }) {
         });
     }
   return (
-    <div>
+    <div className="pt-20">
         <NavBar />
-        <div className="bg-kitchen-image w-full h-screen bg-cover bg-center flex items-center px-4">
+        <div className="bg-concept-image w-full h-screen bg-cover bg-center flex items-center px-4">
             <div className="uppercase text-center text-blue-900 font-extrabold">
                 <h1 className="text-8xl ">General ConTracktor</h1></div>
         {showLogin ? (

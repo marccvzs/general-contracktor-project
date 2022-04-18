@@ -62,7 +62,7 @@ function ClientHome({ user }) {
             <div className="flex-col">
                 <button onClick={() => setShowProfile(showProfile => !showProfile)}>{showProfile ? "Hide" : "Show"} Profile</button>
                 {showProfile ? <Profile user={user}/> : null}
-                <header className="text-center text-2xl">Your Projects</header>
+                <header className="text-center text-2xl bg-slate-800 rounded-xl text-[#7f884a]">Your Projects</header>
                 {projectsList}
             </div>
         {modalOn && <ProjectForm setModalOn={setModalOn} user={user}/>}
