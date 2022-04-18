@@ -58,9 +58,13 @@ function ClientHome({ user }) {
                 </div>
             </button>
         </div>
-        <div onClick={() => setShowProfile(showProfile => !showProfile)}>
-            {showProfile ? <Profile user={user}/> : null}
-            {projectsList}
+        <div className="flex">
+            <div className="flex-col">
+                <button onClick={() => setShowProfile(showProfile => !showProfile)}>{showProfile ? "Hide" : "Show"} Profile</button>
+                {showProfile ? <Profile user={user}/> : null}
+                <header className="text-center text-2xl">Your Projects</header>
+                {projectsList}
+            </div>
         </div>
         {modalOn && <ProjectForm setModalOn={setModalOn} user={user}/>}
     </div>

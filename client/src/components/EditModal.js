@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 function EditModal({ project, setEditModalOn }) {
+    const [isLoading, setIsLoading] = useState(false)
     const { id, name, address, num_rooms, budget, description } = project;
     const [formData, setFormData] = useState({
         name: name,
@@ -63,12 +64,14 @@ function EditModal({ project, setEditModalOn }) {
                     </div>
                     <div>
                         <label>Number of rooms: </label>
-                        <input 
+                        <select 
                         type="text"
                         name="num_rooms"
                         value={formData.num_rooms}
                         placeholder={formData.num_rooms}
-                        onChange={handleChange} />
+                        onChange={handleChange}>
+                            <option>1</option>
+                        </select>
                     </div>
                     <div>
                         <label>Address: </label>
@@ -98,7 +101,7 @@ function EditModal({ project, setEditModalOn }) {
                         onChange={handleChange}
                         />
                     </div>
-                    <button className="bg-sky-300 hover:bg-slate-600 m-1 p-1 rounded-full hover:text-white" type="submit">Submit Change</button>
+                    <button className="bg-sky-300 hover:bg-slate-600 m-1 p-1 rounded-full hover:text-white" type="submit">{isLoading ? "Submitting..." : "Submit"}</button>
                     <button 
                     className="m-20 p-1 bg-slate-500 rounded-full text-white hover:bg-sky-400 hover:text-slate-700"
                     onClick={() => setEditModalOn(false)}>Cancel</button>

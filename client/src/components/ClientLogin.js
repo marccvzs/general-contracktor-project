@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 function ClientLogin({ onLogin, onSetUser }) {
     const [showLogin, setShowLogin] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -21,6 +22,7 @@ function ClientLogin({ onLogin, onSetUser }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        setIsLoading(true);
         fetch("/login/client", {
             method: "POST",
             headers: {
@@ -78,7 +80,7 @@ function ClientLogin({ onLogin, onSetUser }) {
                         </div>
                         <div className="flex items-center justify-between">
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline py-2 m-2">
-                                Sign In
+                                {isLoading ? "Loading..." : "Sign In"}
                             </button>
                         </div>
                 </form>

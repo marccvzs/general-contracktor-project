@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 function ProjectForm({ setModalOn, user }) {
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         budget: 0,
         num_rooms: 0,
@@ -17,7 +18,7 @@ function ProjectForm({ setModalOn, user }) {
             [name]: value
         })
     }
-    console.log(user.id)
+
     function handleSubmit(e) {
         e.preventDefault();
         fetch("/projects", {
@@ -33,6 +34,11 @@ function ProjectForm({ setModalOn, user }) {
                 address: user.address,
                 client_id: user.id
             })
+        })
+        .then(r => {
+            if (r.ok) {
+                setModalOn(false)
+            }
         })
     }
 
@@ -53,7 +59,11 @@ function ProjectForm({ setModalOn, user }) {
                     <div className="m-3">
                         <span>How many rooms:</span>
                         <select className="ml-2" name="num_romms" value={formData.num_rooms} onChange={handleChange}>
-                            
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
                         </select>
                     </div>
                     <div className="m-2">
@@ -76,8 +86,8 @@ function ProjectForm({ setModalOn, user }) {
                         />
                     </div>
                     <div className="flex">
-                        <button className="bg-blue-300" type="submit">Submit</button>
-                        <button className="bg-blue-300 ml-20" type="submit" onClick={() => setModalOn(false)}>Cancel</button>
+                        <button className="bg-blue-300 rounded-xl pl-1 pr-1 hover:bg-slate-600 hover:text-white" type="submit">{isLoading ? "Submitting..." : "Submit"}</button>
+                        <button className="bg-slate-700 ml-20 text-white hover:bg-sky-300 pl-1 pr-1 rounded-xl" type="submit" onClick={() => setModalOn(false)}>Cancel</button>
                     </div>
                 </form>
             </div>

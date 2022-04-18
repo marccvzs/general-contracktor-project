@@ -6,7 +6,7 @@ function ClientLogout({ onLogout }) {
     const [choice, setChoice] = useState(false)
 
     function handleClick() {
-        <ConfirmModal setModalOn={setModalOn} onChoice={setChoice} />
+        setModalOn(true)
         if (choice) {
             fetch("/logout/client", {
                 method: "DELETE",
@@ -22,6 +22,7 @@ function ClientLogout({ onLogout }) {
   return (
     <div>
         <button onClick={handleClick}>Logout</button>
+        {modalOn && <ConfirmModal setModalOn={setModalOn} setChoice={setChoice}/>}
     </div>
   )
 }
