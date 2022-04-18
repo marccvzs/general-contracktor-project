@@ -1,12 +1,16 @@
 module.exports = {
   content: [
-    "./src/components/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   theme: {
-    container: {
-      center: true,
+    // container: {
+    //   center: true,
+    // },
+    extend: {
+      backgroundImage:{
+        'kitchen-image':'url("./components/assets/kitchen.png")'
+      },
     },
-    extend: {},
   },
   plugins: [],
 }

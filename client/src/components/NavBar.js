@@ -11,15 +11,21 @@ function NavBar({ loggedIn, onLogout }) {
   }
 
   return (
-    <header className="bg-stone-200">
-      <div className="p-2">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/project/new">New Project</NavLink>
-        <NavLink to="/client/signup">Sign Up</NavLink>
+    <div className="fixed w-full text-white flex justify-between p-4 items-center">
+      <div className="text-2xl font-bold text-center">
+        <h1>G<span className="block text-4xl">C</span></h1>
+      </div>
+
+      <nav>
+        <ul className="md:flex gap-8 p-6 uppercase bg-white/10">
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/project/new">New Project</NavLink></li>
+          <li><NavLink to="/client/signup">Sign Up</NavLink></li>
+        </ul>
         {loggedIn ? <button onClick={handleLogout}>Logout</button> : null}
         {logoutModalOn && <LogoutModal onLogout={onLogout} logoutModalOn={setLogoutModalOn} setChoice={setLogoutChoice}/>}
-      </div>
-    </header>
+      </nav>
+    </div>
   )
 }
 

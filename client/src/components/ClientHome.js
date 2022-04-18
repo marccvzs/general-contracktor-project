@@ -38,7 +38,7 @@ function ClientHome({ user }) {
 
 
   return (
-    <div className="items-center">
+    <div className="items-center h-screen overflow-y-scroll">
         <header>
             <button 
             className="bg-gradient-to-br from-slate-100 rounded h-8 w-30 m-1 px-1 hover:bg-gradient-to-l"
@@ -65,8 +65,8 @@ function ClientHome({ user }) {
                 <header className="text-center text-2xl">Your Projects</header>
                 {projectsList}
             </div>
-        </div>
         {modalOn && <ProjectForm setModalOn={setModalOn} user={user}/>}
+        </div>
     </div>
   )
 }
