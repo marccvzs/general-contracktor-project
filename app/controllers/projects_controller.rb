@@ -10,6 +10,11 @@ class ProjectsController < ApplicationController
         render json: projects, status: :ok
     end
 
+    def completed
+        projects = Project.where(completed: true)
+        render json: projects, status: :ok
+    end
+
     def update
         project = Project.find(params[:id])
         project.update(project_params)
@@ -25,6 +30,6 @@ class ProjectsController < ApplicationController
     private 
 
     def project_params
-        params.permit(:name, :address, :description, :client_id, :budget, :num_rooms)
+        params.permit(:name, :address, :description, :client_id, :budget, :num_rooms, :completed)
     end
 end

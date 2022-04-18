@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import ProjectForm from './ProjectForm';
 import ClientLogin from './ClientLogin';
 import ClientSignup from './ClientSignup';
+import Posts from './Posts';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,6 +26,7 @@ function App() {
   }, []);
 
   if (!user) return <ClientLogin onLogin={setLoggedIn} onSetUser={setUser} />
+  
   return (
     <div className="bg-gradient-to-br from-amber-300 to-amber-500 h-screen">
       <NavBar loggedIn={loggedIn} onLogout={setLoggedIn}/>
@@ -32,15 +34,12 @@ function App() {
         <Route path="/client/signup">
           <ClientSignup onLogin={setUser} />
         </Route>
-        {/* <Route path="/client/login">
-          <ClientLogin onLogin={setLoggedIn} onSetUser={setUser}/>
-        </Route> */}
         <Route path="/project/new">
           <ProjectForm user={user}/>
         </Route>
-        {/* <Route path="/home">
-          <ClientHome user={user} />
-        </Route> */}
+        <Route path="/posts">
+          <Posts />
+        </Route>
         <Route exact path="/">
         <ClientHome user={user} />
         </Route>

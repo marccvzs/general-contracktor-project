@@ -98,7 +98,10 @@ function EditModal({ project, setEditModalOn }) {
                         onChange={handleChange}
                         />
                     </div>
-                    <button type="submit">Edit</button>
+                    <button className="bg-sky-300 hover:bg-slate-600 m-1 p-1 rounded-full hover:text-white" type="submit">Submit Change</button>
+                    <button 
+                    className="m-20 p-1 bg-slate-500 rounded-full text-white hover:bg-sky-400 hover:text-slate-700"
+                    onClick={() => setEditModalOn(false)}>Cancel</button>
                 </form>
             </div>
         </div>

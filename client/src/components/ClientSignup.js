@@ -54,7 +54,7 @@ function ClientSignup({ onLogin, onSetUser }) {
   
 
   return (
-    <div className="flex flex-wrap mt-20 justify-center">
+    <div className="flex flex-wrap mt-20 justify-center p-2">
       <form onSubmit={handleSubmit}>
         <div>
           <input
@@ -107,7 +107,8 @@ function ClientSignup({ onLogin, onSetUser }) {
           />
         </div>
         <div>
-          <button className="bg-slate-400 hover:bg-blue-200 rounded" type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+          <button 
+          className="bg-slate-400 hover:bg-blue-200 rounded p-2" type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
         </div>
         <Errors errors={errors} />
       </form>

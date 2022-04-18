@@ -44,11 +44,12 @@ function ClientLogin({ onLogin, onSetUser }) {
     }
   return (
       <div className="bg-gradient-to-br from-amber-200 h-screen">
+          <header className="justify-center flex p-2 font-bold text-3xl text-lime-600 items-center">ConTracktor</header>
     {showLogin ? (
         <>
             <div className="flex flex-wrap mt-20 justify-center">
                 <div className="w-full max-w-sm">
-                <form onSubmit={handleSubmit} className="shadown-md bg-white rounded pt-6 pb-8 mb-4">
+                <form onSubmit={handleSubmit} className="shadown-md bg-white p-2 rounded pt-6 pb-8 mb-4">
                     <div className="mb">
                         <label htmlFor="" className="block text-gray-700 text-sm font-bold mb-2">
                             Email
@@ -81,13 +82,18 @@ function ClientLogin({ onLogin, onSetUser }) {
                             </button>
                         </div>
                 </form>
-                <span>Don't have an account? <button onClick={() => setShowLogin(false)}>Sign Up</button></span>
+                <span>Don't have an account? 
+                    <button 
+                    className="m-1 hover:text-blue-500"
+                    onClick={() => setShowLogin(false)}>Sign Up</button>
+                    </span>
             </div>
         </div>
     </>
     ) : (
         <>
             <ClientSignup onLogin={onLogin} onSetUser={onSetUser}/>
+            <button onClick={() => setShowLogin(true)}>Cancel</button>
         </>
     )}
   </div>

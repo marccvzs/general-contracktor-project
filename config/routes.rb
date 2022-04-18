@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts, only: [:index, :create, :destroy]
   # resources :notes, only: [:create, :show, :destroy]
   # resources :project_tasks, only: [:index, :create, :show, :destroy]
   resources :room_imgs, only: [:create, :show, :destroy]
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   get "/client/me", to: "clients#show"
   get "/contractor/me", to: "contractors#show"
+
+  get "/completed", to: "projects#completed"
 
   post "/login/client", to: "sessions#create_client"
   post "/login/contractor", to: "sessions#create_contractor"

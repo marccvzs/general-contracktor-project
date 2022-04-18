@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_17_204826) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_034123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_204826) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_posts_on_client_id"
+    t.index ["project_id"], name: "index_posts_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -65,6 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_204826) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "posts", "clients"
+  add_foreign_key "posts", "projects"
   add_foreign_key "projects", "clients"
   add_foreign_key "room_imgs", "clients"
   add_foreign_key "room_imgs", "contractors"

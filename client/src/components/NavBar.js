@@ -27,13 +27,13 @@ function NavBar({ loggedIn, onLogout }) {
   console.log(loggedIn)
 
   return (
-    <div className="bg-stone-200">
-      <NavLink to="/client/projects">Home</NavLink>
-      <NavLink to="/projects/new">New Project</NavLink>
+    <header className="bg-stone-200">
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/project/new">New Project</NavLink>
       <NavLink to="/client/signup">Sign Up</NavLink>
       {loggedIn ? <button onClick={handleLogout}>Logout</button> : null}
       {modalOn && <ConfirmModal setModalOn={setModalOn} setChoice={setChoice}/>}
-    </div>
+    </header>
   )
 }
 

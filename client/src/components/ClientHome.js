@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ProjectForm from './ProjectForm';
 import ProjectCard from './ProjectCard';
 import Profile from './Profile';
-import Switch from './Switch';
 
 function ClientHome({ user }) {
     const [projects, setProjects] = useState([])
     const [modalOn, setModalOn] = useState(false)
-    const [choice, setChoice] = useState(false)
+    const [toggle, setToggle] = useState(true)
+    const [showProfile, setShowProfile] = useState(false)
 
     useEffect(() => {
         fetch("/projects")
@@ -20,22 +20,48 @@ function ClientHome({ user }) {
         setProjects(updatedList)
     }
 
-    const projectsList = projects.map(project => {
+    console.log(projects)
+    const projectsList = projects.filter(project => {
+        if (!toggle) {
+            return(
+                project.completed === true
+        )} else {
+            return project
+        }
+    }).map(project => {
         return (
             <ProjectCard key={project.id} project={project} onDelete={handleDelete}/>
         )
     })
 
+    const toggleClass = 'transform translate-x-6 bg-green-500';
+
 
   return (
-    <div>
-        <button 
-        className="bg-gradient-to-br from-slate-100 rounded h-8 w-30 m-1 px-1 hover:bg-gradient-to-l"
-        onClick={() => setModalOn(modalOn => !modalOn)}>
-        New Project +
-        </button>
-        <Profile user={user}/>
-        {projectsList}
+    <div className="items-center">
+        <header>
+            <button 
+            className="bg-gradient-to-br from-slate-100 rounded h-8 w-30 m-1 px-1 hover:bg-gradient-to-l"
+            onClick={() => setModalOn(modalOn => !modalOn)}>
+            New Project +
+            </button>
+        </header>
+        <div className="m-1">
+            <label className="m-1">Filter {toggle ? "Completed" : "All"}</label>
+            <br/>
+            <button 
+            className="w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer"
+            onClick={() => setToggle(toggle => !toggle)}>
+                <div 
+                className={"bg-white md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out" + (toggle ? null : toggleClass)}
+                >
+                </div>
+            </button>
+        </div>
+        <div onClick={() => setShowProfile(showProfile => !showProfile)}>
+            {showProfile ? <Profile user={user}/> : null}
+            {projectsList}
+        </div>
         {modalOn && <ProjectForm setModalOn={setModalOn} user={user}/>}
     </div>
   )
