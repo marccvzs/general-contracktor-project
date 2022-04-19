@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ClientSignup from './ClientSignup';
 import NavBar from './NavBar';
 import { Link, Redirect } from 'react-router-dom';
+import CustomBtn from './CustomBtn';
 
 function ClientLogin({ onLogin, onSetUser }) {
     const [showLogin, setShowLogin] = useState(true)
@@ -46,16 +47,16 @@ function ClientLogin({ onLogin, onSetUser }) {
         });
     }
   return (
-    <div className="pt-20">
+    <div>
         <NavBar />
-        <div className="bg-concept-image w-full h-screen bg-cover bg-center flex items-center px-4">
-            <div className="uppercase text-center text-blue-900 font-extrabold">
-                <h1 className="text-8xl ">General ConTracktor</h1></div>
+        <div className="bg-concept-image w-full h-screen bg-cover bg-center flex items-center justify-center px-2">
+            <div className="text-center font-extrabold m-8">
+                <h1 className="text-6xl text-[#7f884a]/90">iRENO</h1></div>
         {showLogin ? (
             <>
                 <div className="flex flex-wrap mt-20 justify-center">
                     <div className="w-full max-w-sm">
-                    <form onSubmit={handleSubmit} className="shadown-md bg-white p-2 rounded pt-6 pb-8 mb-4">
+                    <form onSubmit={handleSubmit} className="text-center shadown-md bg-[#7f884a]/90 p-2 border-2 border-black rounded pt-6 pb-8 mb-4">
                         <div className="mb">
                             <label htmlFor="" className="block text-gray-700 text-sm font-bold mb-2">
                                 Email
@@ -82,17 +83,23 @@ function ClientLogin({ onLogin, onSetUser }) {
                             onChange={handleChange}
                             />
                             </div>
-                            <div className="flex items-center justify-between">
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline py-2 m-2">
+                            <CustomBtn 
+                            children="Sign In"
+                            />
+                            {/* <div className="flex items-center justify-between">
+                                <button 
+                                className={'bg-[#7f884a] border-2 transition ease-in-out delay-150 duration-300 border-black hover:-translate-y-1 hover:scale-110 hover:bg-[#000080]/70 text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline py-2 m-2' + (isLoading ? 'animate-spin' : null)}
+                                type="submit">
                                     {isLoading ? "Loading..." : "Sign In"}
                                 </button>
-                            </div>
+                            </div> */}
                     </form>
-                    <span>Don't have an account? 
+                    <div className="bg-white/70 p-1">
+                        <span>Don't have an account?</span>
                         <button 
                         className="m-1 hover:text-blue-500"
-                        onClick={() => setShowLogin(false)}>Sign Up</button>
-                        </span>
+                        onClick={() => setShowLogin(false)}> Sign Up</button>
+                    </div>
                 </div>
             </div>
         </>

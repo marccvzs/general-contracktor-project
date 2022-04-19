@@ -30,20 +30,22 @@ function App() {
   return (
     <div className="bg-kitchen-image bg-cover bg-center w-full h-screen">
       <NavBar loggedIn={loggedIn} onLogout={setUser}/>
-      <Switch>
-        <Route path="/client/signup">
-          <ClientSignup onLogin={setUser} />
-        </Route>
-        <Route path="/project/new">
-          <ProjectForm user={user}/>
-        </Route>
-        <Route path="/posts">
-          <Posts />
-        </Route>
-        <Route exact path="/">
-        <ClientHome user={user} />
-        </Route>
-      </Switch>
+      <div className="p-20">
+        <Switch>
+          <Route path="/client/signup">
+            <ClientSignup onLogin={setUser} />
+          </Route>
+          <Route path="/project/new">
+            <ProjectForm user={user}/>
+          </Route>
+          <Route path="/posts">
+            <Posts />
+          </Route>
+          <Route exact path="/">
+          <ClientHome user={user} />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }

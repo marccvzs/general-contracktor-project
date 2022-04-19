@@ -17,7 +17,7 @@ function ProjectCard({ project, onDelete }) {
       })
         .then(r => {
           if (r.ok) {
-            isLoading(true)
+            setIsLoading(true)
           }
         })
         }

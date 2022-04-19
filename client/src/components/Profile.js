@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Profile({ user }) {
-    const { name, address, budget, email, projects } = user
+    const { name, address, email, projects } = user
     console.log(user)
   return (
     <div className="bg-[#7f884a]/80 items-center px-20 m-1 rounded-xl border-2 border-stone-700 shadow-lg">

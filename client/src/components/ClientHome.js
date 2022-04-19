@@ -38,14 +38,12 @@ function ClientHome({ user }) {
 
 
   return (
-    <div className="items-center h-screen overflow-y-scroll">
-        <header>
+    <div className="items-center overflow-y-scroll">
             <button 
             className="bg-gradient-to-br from-slate-100 rounded h-8 w-30 m-1 px-1 hover:bg-gradient-to-l"
             onClick={() => setModalOn(modalOn => !modalOn)}>
             New Project +
             </button>
-        </header>
         <div className="m-1">
             <label className="m-1">Filter {toggle ? "Completed" : "All"}</label>
             <br/>
