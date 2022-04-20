@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import ClientHome from './ClientHome';
 import NavBar from './NavBar';
 import ProjectForm from './ProjectForm';
 import ClientLogin from './ClientLogin';
 import ClientSignup from './ClientSignup';
 import Posts from './Posts';
+import Profile from './Profile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,7 +29,7 @@ function App() {
   if (!user) return <ClientLogin onLogin={setLoggedIn} onSetUser={setUser} />
   
   return (
-    <div className="bg-kitchen-image bg-cover bg-center w-full h-screen">
+    <div className="bg-cover bg-center w-full h-screen md:w-full">
       <NavBar loggedIn={loggedIn} onLogout={setUser}/>
       <div className="p-20">
         <Switch>
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/project/new">
             <ProjectForm user={user}/>
+          </Route>
+          <Route path="/profile">
+            <Profile user={user}/>
           </Route>
           <Route path="/posts">
             <Posts />

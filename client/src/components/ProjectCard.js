@@ -7,7 +7,7 @@ function ProjectCard({ project, onDelete }) {
   const [choice, setChoice] = useState(false);
   const [editModalOn, setEditModalOn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { id, budget, num_rooms, name, client_id, description, completed } = project
+  const { id, budget, num_rooms, name, client_id, description, completed, img} = project
   
   function handleDeleteClick() {
     setModalOn(true)
@@ -42,30 +42,22 @@ function ProjectCard({ project, onDelete }) {
   }
 
   return (
-    <div className="flex justify-center items-center py-2 px-3 m-2">
-      <div className="relative shadow-xl flex-col font-mono justify-center bg-black/40 backdrop-blur-sm text-white py-12 px-24 border-4 border-[#7f884a] rounded-xl">
-       <div>
-        <h3 className="text-lg">{name}</h3>
+    <div className="relative hover:opacity-80 shadow-md transition-all cursor-pointer p-4 bg-blue-200/10 shadow-black backdrop-blur-lg">
+      <div className={`w-full h-5/6 bg-cover bg-center`}>
+        <h1 className={`absolute left-2/4 top-1/2 translate text-black uppercase -translate-x-1/2 -translate=y-1/2 text-2xl`}>{name}</h1>
       </div>
-      <div>
-        <h6>Budget: ${budget}</h6>
+      <div className="m-2 lg:m-4">
+        <h1 className="uppercase text-white font-bold">${budget}</h1>
+        <button className="-translate-y-5 -translate-x-5 bg-[rgb(127,136,74)] shadow-md shadow-black px-1 hover:text-black rounded-xl" onClick={handleEdit}>
+          Edit</button>
+        <button 
+        className="-translate-y-5 translate-x-5 ml-20 px-1 bg-slate-500 hover:bg-sky-400 shadow-md shadow-black text-white rounded-xl"
+        onClick={handlePostClick}>{isLoading ? "Loading..." : "Post"}</button>
       </div>
-      <h6>{num_rooms} rooms</h6>
-      <p className="bg-slate-200 rounded-xl text-slate-600 p-1">{description}</p>
-      <h6>Status: {completed ? "Completed" : "In Progress"}</h6>
-      <div>
-        <button className="absolute h-8 shadow-xl -top-4 -right-3 py-1 px-1 bg-stone-400 border rounded-full hover:bg-blue-200"onClick={handleDeleteClick}>
-          X</button>
-      </div>
-      <button className="bg-[#7f884a] border-2 px-1 hover:text-black rounded-xl" onClick={handleEdit}>
-        Edit</button>
-      <button 
-      className="ml-20 px-1 bg-slate-500 hover:bg-sky-400 text-white rounded-xl"
-      onClick={handlePostClick}>{isLoading ? "Loading..." : "Post"}</button>
       {editModalOn && <EditModal setEditModalOn={setEditModalOn} project={project} />}
       {modalOn && <ConfirmModal setModalOn={setModalOn} setChoice={setChoice} />}
     </div>
-    </div>
+
   )
 }
 

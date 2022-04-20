@@ -13,6 +13,7 @@ function EditModal({ project, setEditModalOn }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        setIsLoading(true);
         fetch(`/projects/${id}`, {
             method: "PATCH",
             headers: {
@@ -49,9 +50,9 @@ function EditModal({ project, setEditModalOn }) {
 
 
   return (
-    <div className="bg-lime-200 opacity-80 fixed inset-0 z-50" >
+    <div className="bg-[#7f884a] opacity-80 fixed inset-0 z-50" >
         <div className="flex h-screen justify-center items-center">
-            <div className="flex-col justify-center bg-white py-12 px-24 border-4 borger-green-700 rounded-xl">
+            <div className="flex-col justify-center bg-white py-12 px-24 border-4 borger-[#7f884a] rounded-xl">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Name: </label>

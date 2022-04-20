@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProjectForm from './ProjectForm';
 import ProjectCard from './ProjectCard';
 import Profile from './Profile';
+import CustomBtn from './CustomBtn';
 
 function ClientHome({ user }) {
     const [projects, setProjects] = useState([])
@@ -20,7 +21,6 @@ function ClientHome({ user }) {
         setProjects(updatedList)
     }
 
-    console.log(projects)
     const projectsList = projects.filter(project => {
         if (!toggle) {
             return(
@@ -34,36 +34,20 @@ function ClientHome({ user }) {
         )
     })
 
-    const toggleClass = 'transform translate-x-6 bg-green-500';
-
-
   return (
-    <div className="items-center overflow-y-scroll">
-            <button 
-            className="bg-gradient-to-br from-slate-100 rounded h-8 w-30 m-1 px-1 hover:bg-gradient-to-l"
-            onClick={() => setModalOn(modalOn => !modalOn)}>
-            New Project +
-            </button>
-        <div className="m-1">
-            <label className="m-1">Filter {toggle ? "Completed" : "All"}</label>
-            <br/>
-            <button 
-            className="w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer"
-            onClick={() => setToggle(toggle => !toggle)}>
-                <div 
-                className={"bg-white md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transform duration-300 ease-in-out" + (toggle ? null : toggleClass)}
-                >
-                </div>
-            </button>
+    <div className="bg-gradient-to-br from-zinc-200">
+        <div className="w-full text-white bg-cover bg-gradient-to-br from-zinc-200 uppercase p-6">
+                <CustomBtn children={"Filter " + (toggle ? "Completed" : "All")} onClickItem={() => setToggle(toggle => !toggle)}/>
         </div>
-        <div className="flex">
-            <div className="flex-col">
-                <button onClick={() => setShowProfile(showProfile => !showProfile)}>{showProfile ? "Hide" : "Show"} Profile</button>
-                {showProfile ? <Profile user={user}/> : null}
-                <header className="text-center text-2xl bg-slate-800 rounded-xl text-[#7f884a]">Your Projects</header>
-                {projectsList}
-            </div>
-        {modalOn && <ProjectForm setModalOn={setModalOn} user={user}/>}
+        <div className="flex flex-col items-start">
+            {showProfile ? <Profile user={user}/> : null}
+        </div>
+        <header className="text-center text-2xl p-1 m-1 bg-slate-800 rounded-xl text-[#7f884a] shadow-md shadow-black uppercase font-bold">
+            Your Projects
+        </header>
+        <div className="w-full h-screen bg-kitchen-image bg-cover bg-center grid place-items-center lg:grid-cols-2 children:w-11/12 children:h-5/6 text-center p-4">
+            {projectsList}
+            {modalOn && <ProjectForm setModalOn={setModalOn} user={user}/>}
         </div>
     </div>
   )

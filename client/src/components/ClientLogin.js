@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ClientSignup from './ClientSignup';
 import NavBar from './NavBar';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import CustomBtn from './CustomBtn';
 
 function ClientLogin({ onLogin, onSetUser }) {

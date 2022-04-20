@@ -2,6 +2,11 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx}",
   ],
+
+  // variants: {
+  //   display: ['children', 'default', 'children-first', 'children-last', 'chil']
+  // }, 
+
   theme: {
     
     screens: {
@@ -17,9 +22,12 @@ module.exports = {
     extend: {
       backgroundImage:{
         'kitchen-image':'url("./components/assets/kitchen.png")',
-        'concept-image':'url("./components/assets/concept.jpg")'
+        'concept-image':'url("./components/assets/concept.jpg")',
+        'devol-image': 'url("./components/assets/devol.jpg")'
       },
     },
   },
-  plugins: [],
+  plugins: [ 
+    require('tailwindcss-children'), 
+  ],
 }
