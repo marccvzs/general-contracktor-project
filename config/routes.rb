@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts, only: [:index, :create, :destroy]
+  resources :posts, only: [:index, :show, :create, :destroy]
   # resources :notes, only: [:create, :show, :destroy]
   # resources :project_tasks, only: [:index, :create, :show, :destroy]
   resources :room_imgs, only: [:create, :show, :destroy]

@@ -5,9 +5,20 @@ class PostsController < ApplicationController
         render json: posts, status: :ok
     end
 
+    def show 
+        posts = Post.find_by(client_id: session[:client_id])
+        render json: posts, status: :ok
+    end
+
     def create
         post = Post.create!(post_params)
-        render json: post, include: :project, status: :created
+        render json: post, status: :created
+    end
+
+    def destroy
+        post = Post.find(params[:id])
+        post.destroy
+        head :no_content
     end
 
     private 

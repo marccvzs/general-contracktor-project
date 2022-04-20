@@ -10,10 +10,7 @@ function Posts() {
         .then(postsArray => setPosts(postsArray))
     }, [])
 
-    console.log(posts)
-
     const postsList = posts.map(post => {
-        console.log(post.project)
         return (
             <PostCard key={post.id} post={post} />
         )

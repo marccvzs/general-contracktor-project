@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ProfileEdit({ onEdit }) {
+function ProfileEdit({ onEdit, setUser }) {
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         name: '',
@@ -36,6 +36,7 @@ function ProfileEdit({ onEdit }) {
                     r.json()
                     .then(client => {
                         setIsLoading(false);
+                        setUser(client)
                     })
                 }
             })

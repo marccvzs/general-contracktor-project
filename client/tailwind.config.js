@@ -20,6 +20,10 @@ module.exports = {
     },
 
     extend: {
+      zIndex: {
+        '100': '100',
+      },
+
       backgroundImage:{
         'kitchen-image':'url("./components/assets/kitchen.png")',
         'concept-image':'url("./components/assets/concept.jpg")',
