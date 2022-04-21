@@ -11,13 +11,14 @@ function ProjectCard({ project, onDelete, confirm, setModalOn, onPostClick }) {
 
   function handleDeleteClick() {
     setModalOn(true)
+    setIsLoading(true)
     if (choice) {
       fetch(`/projects/${id}`, {
         method: "DELETE"
       })
         .then(r => {
           if (r.ok) {
-            setIsLoading(true)
+            setIsLoading(false)
           }
         })
         }
@@ -35,6 +36,7 @@ function ProjectCard({ project, onDelete, confirm, setModalOn, onPostClick }) {
 
   return (
     <div className="relative hover:opacity-80 shadow-md transition-all cursor-pointer p-4 bg-blue-200/10 shadow-black backdrop-blur-lg">
+      <button className="float-right hover:bg-red-600 rounded-full p-2" onClick={handleDeleteClick}>X</button>
      {toggle ? null : <div className={`w-full h-5/6 bg-cover bg-center`}>
         <h1 className={`absolute left-2/4 top-1/2 translate text-black uppercase -translate-x-1/2 -translate=y-1/2 text-2xl`}>{name}</h1>
       </div>}
@@ -44,10 +46,11 @@ function ProjectCard({ project, onDelete, confirm, setModalOn, onPostClick }) {
         <div>
           <h1 className="uppcase text-3xl font-bold text-[rgb(127,136,74)]">{name}</h1>
           <h2 className="uppercase text-white font-bold">${budget}</h2>
-          <button className="-translate-y-5 -translate-x-5 bg-[rgb(127,136,74)] shadow-md shadow-black px-1 hover:text-black rounded-xl" onClick={handleEdit}>
+          <h3 className="uppercase text-white font-bold">Number of rooms: {num_rooms}</h3>
+          <button className="bg-[rgb(127,136,74)] shadow-md shadow-black px-1 hover:text-black rounded-xl" onClick={handleEdit}>
             Edit</button>
           <button 
-          className="-translate-y-5 translate-x-5 ml-20 px-1 bg-slate-500 hover:bg-sky-400 shadow-md shadow-black text-white rounded-xl"
+          className="ml-20 px-1 bg-slate-500 hover:bg-sky-400 shadow-md shadow-black text-white rounded-xl"
           onClick={handlePost}>{isLoading ? "Loading..." : "Post"}</button> 
         </div>
         : null}
