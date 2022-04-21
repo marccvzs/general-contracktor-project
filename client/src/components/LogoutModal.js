@@ -1,9 +1,8 @@
 import React from 'react';
 
-function LogoutModal({ onLogout, logoutModalOn, setChoice }) {
+function LogoutModal({ onLogout, setLogoutModalOn }) {
 
     function handleOkClick() {
-        setChoice(true)
         fetch('/logout/client', {
             method: "DELETE",
           })
@@ -12,12 +11,11 @@ function LogoutModal({ onLogout, logoutModalOn, setChoice }) {
                 onLogout(null);
               }
           })
-        logoutModalOn(false)
+        setLogoutModalOn(false)
     }
     
     function handleNoClick() {
-        setChoice(false)
-        logoutModalOn(false)
+        setLogoutModalOn(false)
     }
 
   return (

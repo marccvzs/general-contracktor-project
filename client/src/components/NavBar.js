@@ -35,12 +35,12 @@ function NavBar({ loggedIn, onLogout }) {
           {loggedIn ? <li><NavLink to="/posts">Posts</NavLink></li> : null }
           {loggedIn ? <li><NavLink to="/profile">Profile</NavLink></li> : null }
           {loggedIn ? null : <li><NavLink to="/client/signup">Sign Up</NavLink></li>}
-          {loggedIn ? <li className="cursor-pointer" onClick={handleLogout}>Logout</li> : null}
+          {loggedIn ? <li className="cursor-pointer" onClick={onLogout}>Logout</li> : null}
         </ul>
 
         <MenuItems showMenu={showMenu} active={active} />
 
-        {logoutModalOn && <LogoutModal onLogout={onLogout} logoutModalOn={setLogoutModalOn} setChoice={setLogoutChoice}/>}
+        {/* {logoutModalOn && <LogoutModal onLogout={onLogout} logoutModalOn={setLogoutModalOn} setChoice={setLogoutChoice}/>} */}
       </nav>
     </div>
   )

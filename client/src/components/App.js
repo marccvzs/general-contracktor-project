@@ -8,10 +8,12 @@ import ClientLogin from './ClientLogin';
 import ClientSignup from './ClientSignup';
 import Posts from './Posts';
 import Profile from './Profile';
+import LogoutModal from './LogoutModal';
 
 function App() {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [logoutModalOn, setLogoutModalOn] = useState(false)
 
   useEffect(() => {
     fetch("/client/me")
@@ -26,11 +28,15 @@ function App() {
     });
   }, []);
 
+  function onLogout() {
+    setLogoutModalOn(true)
+  }
+
   if (!user) return <ClientLogin onLogin={setLoggedIn} onSetUser={setUser} />
   
   return (
     <div className="bg-cover bg-center w-full bg-slate-800 h-full md:w-full">
-      <NavBar loggedIn={loggedIn} onLogout={setUser}/>
+      <NavBar loggedIn={loggedIn} onLogout={onLogout}/>
       <div className="p-20">
         <Switch>
           <Route path="/client/signup">
@@ -50,6 +56,7 @@ function App() {
           </Route>
         </Switch>
       </div>
+      {logoutModalOn && <LogoutModal onLogout={setUser} setLogoutModalOn={setLogoutModalOn} />}
     </div>
   );
 }
