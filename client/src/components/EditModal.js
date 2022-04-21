@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function EditModal({ project, setEditModalOn }) {
+function EditModal({ project, setEditModalOn, onEdit }) {
     const [isLoading, setIsLoading] = useState(false)
     const { id, name, address, num_rooms, budget, description } = project;
     const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ function EditModal({ project, setEditModalOn }) {
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
+        console.log(id)
         fetch(`/projects/${id}`, {
             method: "PATCH",
             headers: {
@@ -33,6 +34,7 @@ function EditModal({ project, setEditModalOn }) {
                 r.json()
                 .then(project => {
                     setEditModalOn(false)
+                    onEdit(project)
                 })
             }
         })
@@ -50,13 +52,14 @@ function EditModal({ project, setEditModalOn }) {
 
 
   return (
-    <div className="bg-[#7f884a] opacity-80 fixed inset-0 z-50" >
+    <div className="bg-[#7f884a] opacity-90 fixed inset-0 z-50" >
         <div className="flex h-screen justify-center items-center">
-            <div className="flex-col justify-center bg-white py-12 px-24 border-4 borger-[#7f884a] rounded-xl">
-                <form onSubmit={handleSubmit}>
+            <div className="flex-col justify-center bg-black/80 py-12 px-24 border-4 border-white rounded-xl">
+                <form className="text-white border p-2"onSubmit={handleSubmit}>
                     <div>
                         <label>Name: </label>
                         <input
+                        className="bg-transparent"
                         type="text"
                         name="name"
                         value={formData.name}
@@ -66,6 +69,7 @@ function EditModal({ project, setEditModalOn }) {
                     <div>
                         <label>Number of rooms: </label>
                         <select 
+                        className="bg-transparent"
                         type="text"
                         name="num_rooms"
                         value={formData.num_rooms}
@@ -77,6 +81,7 @@ function EditModal({ project, setEditModalOn }) {
                     <div>
                         <label>Address: </label>
                         <input 
+                        className="bg-transparent"
                         type="text"
                         name="address"
                         value={formData.address}
@@ -86,6 +91,7 @@ function EditModal({ project, setEditModalOn }) {
                     <div>
                         <label>Budget: </label>
                         <input 
+                        className="bg-transparent"
                         type="text"
                         name="budget"
                         placeholder={formData.budget}
@@ -96,15 +102,16 @@ function EditModal({ project, setEditModalOn }) {
                     <div>
                         <label>Description: </label>
                         <textarea 
+                        className="bg-transparent"
                         type="type"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
                         />
                     </div>
-                    <button className="bg-sky-300 hover:bg-slate-600 m-1 p-1 rounded-full hover:text-white" type="submit">{isLoading ? "Submitting..." : "Submit"}</button>
+                    <button className="hover:bg-[#7f884a] bg-transparent m-1 p-1 rounded-full hover:text-white" type="submit">{isLoading ? "Submitting..." : "Submit"}</button>
                     <button 
-                    className="m-20 p-1 bg-slate-500 rounded-full text-white hover:bg-sky-400 hover:text-slate-700"
+                    className="m-20 p-1 hover:bg-red-500 rounded-full text-white bg-transparent hover:text-white"
                     onClick={() => setEditModalOn(false)}>Cancel</button>
                 </form>
             </div>

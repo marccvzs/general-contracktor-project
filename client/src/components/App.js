@@ -29,7 +29,7 @@ function App() {
   if (!user) return <ClientLogin onLogin={setLoggedIn} onSetUser={setUser} />
   
   return (
-    <div className="bg-cover bg-center w-full h-screen md:w-full">
+    <div className="bg-cover bg-center w-full bg-slate-800 h-full md:w-full">
       <NavBar loggedIn={loggedIn} onLogout={setUser}/>
       <div className="p-20">
         <Switch>

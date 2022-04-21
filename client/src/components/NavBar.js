@@ -20,7 +20,7 @@ function NavBar({ loggedIn, onLogout }) {
   return (
     <div className="fixed w-full text-white flex justify-between p-4 items-center">
       <div className="text-2xl font-bold shadow-black shadow-md text-center border-2 border-black bg-[#7f884a]/70 rounded-full p-1">
-        <h1 className="text-stone-500 shadow-lg bg-transparent">GC</h1>
+        <h1 className="text-stone-700 shadow-lg bg-transparent">GC</h1>
       </div>
 
       <nav>

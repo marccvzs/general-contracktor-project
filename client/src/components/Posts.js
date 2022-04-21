@@ -17,7 +17,7 @@ function Posts() {
     })
     
   return (
-    <div className="bg-[#7f884a]/70 mt-4 w-full bg-cover h-screen">
+    <div className="bg-[#7f884a]/70 rounded-lg shadow-xl shadow-black mt-4 w-full bg-cover h-screen">
         <header className="p-4 uppercase font-bold text-3xl">Posts</header>
         <div className="m-5">
             {postsList}

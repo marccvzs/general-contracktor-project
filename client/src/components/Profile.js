@@ -13,10 +13,27 @@ function Profile({ user, setUser }) {
       .then(postsArray => setPosts(postsArray))
     }, [])
 
+    function handleDelete(id) {
+      fetch(`/posts/${id}`, {
+        method: "DELETE"
+      })
+      .then(r => r.json())
+      .then(handleUpdated(id))
+    }
+
+    function handleUpdated(id) {
+      const updated = posts.filter(post => post.id !== id)
+      setPosts(updated)
+    }
+
     console.log(posts)
     const postsList = posts.map(post => {
       return(
-        <PostCard key={post.id} post={post} />
+        <div className="bg-[#7f884a]/30 p-4 border rounded m-1">
+          <button className='text-black hover:bg-red-600 z-50 rounded-full p-1 left-0 top-0'
+          onClick={() => handleDelete(post.id)}>X</button>
+          <PostCard key={post.id} post={post} />
+        </div>
       )
     })
     
