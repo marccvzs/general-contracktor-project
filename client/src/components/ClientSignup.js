@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Errors from './Errors';
+import { Redirect } from 'react-router-dom';
 
 function ClientSignup({ onLogin, onSetUser }) {
   const [errors, setErrors] = useState([])
@@ -43,7 +44,23 @@ function ClientSignup({ onLogin, onSetUser }) {
         r.json()
         .then(user => {
           onLogin(true)
-          onSetUser(user)
+          onSetUser(user);
+          fetch('/login/client', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: user.email,
+              password: formData.password
+            })
+          })
+          .then(r => {
+            if (r.ok) {
+              r.json()
+              .then( <Redirect push to='/project/new'/>)
+            }
+          })
         });
       } else {
       r.json()
@@ -54,11 +71,12 @@ function ClientSignup({ onLogin, onSetUser }) {
   
 
   return (
-    <div className="flex flex-wrap mt-20 justify-center p-2">
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-wrap mt-20 justify-center p-2 bg-[#7f884a]/80 rounded shadow-lg shadow-black">
+      <form className="border "onSubmit={handleSubmit}>
+        <h1 className="text-3xl font-bold text-center">Sign Up</h1>
         <div>
           <input
-          className="m-2"
+          className="m-2 bg-transparent text-black"
           type="text"
           placeholder="Name..."
           name="name"
@@ -68,7 +86,7 @@ function ClientSignup({ onLogin, onSetUser }) {
         </div>
         <div>
           <input 
-          className="m-2"
+          className="m-2 bg-transparent"
           type="email"
           placeholder="Email..."
           name="email"
@@ -78,7 +96,7 @@ function ClientSignup({ onLogin, onSetUser }) {
         </div>
         <div>
           <input
-          className="m-2"
+          className="m-2 bg-transparent"
           type="text"
           placeholder="Address.."
           name="address"
@@ -88,7 +106,7 @@ function ClientSignup({ onLogin, onSetUser }) {
         </div>
         <div>
           <input
-          className="m-2"
+          className="m-2 bg-transparent"
           type="password"
           placeholder="Password..."
           name="password"
@@ -98,7 +116,7 @@ function ClientSignup({ onLogin, onSetUser }) {
         </div>
         <div>
           <input
-          className="m-2"
+          className="m-2 bg-transparent"
           type="password"
           placeholder="Confirm Password..."
           name="password_confirmation"
@@ -108,7 +126,10 @@ function ClientSignup({ onLogin, onSetUser }) {
         </div>
         <div>
           <button 
-          className="bg-slate-400 hover:bg-blue-200 rounded p-2" type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+          className="bg-transparent hover:bg-black/50 hover:text-white hover:shadow-md hover:shadow-black rounded p-2" type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+          <button
+          className="bg-transparent hover:bg-red-500/50 hover:shadow-md hover:shadow-black m-1 rounded p-2"
+          >Clear</button>
         </div>
         <Errors errors={errors} />
       </form>

@@ -48,7 +48,7 @@ function ClientLogin({ onLogin, onSetUser }) {
     }
   return (
     <div>
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="bg-concept-image w-full h-screen bg-cover bg-center flex items-center justify-center px-2">
             <div className="text-center font-extrabold m-8">
                 <h1 className="text-6xl text-[#7f884a]/90">iRENO</h1></div>

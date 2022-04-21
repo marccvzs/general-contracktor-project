@@ -14,7 +14,7 @@ function ProjectForm({ user }) {
     function handleChange(e) {
         const value = e.target.value
         const name = e.target.name
-        console.log(formData)
+
         setFormData({
             ...formData,
             [name]: value

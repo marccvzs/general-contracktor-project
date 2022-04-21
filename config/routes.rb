@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get "/completed", to: "projects#completed"
 
+  get "/myposts", to: "posts#myposts"
+
   post "/login/client", to: "sessions#create_client"
   post "/login/contractor", to: "sessions#create_contractor"
 

@@ -17,8 +17,11 @@ function Posts() {
     })
     
   return (
-    <div>
-        {postsList}
+    <div className="bg-[#7f884a]/70 mt-4 w-full bg-cover h-screen">
+        <header className="p-4 uppercase font-bold text-3xl">Posts</header>
+        <div className="m-5">
+            {postsList}
+        </div>
     </div>
   )
 }

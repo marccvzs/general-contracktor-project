@@ -5,8 +5,8 @@ class PostsController < ApplicationController
         render json: posts, status: :ok
     end
 
-    def show 
-        posts = Post.find_by(client_id: session[:client_id])
+    def myposts 
+        posts = Post.all.where(client_id: session[:client_id])
         render json: posts, status: :ok
     end
 

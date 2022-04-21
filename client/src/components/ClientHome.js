@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 import CustomBtn from './CustomBtn';
-import ConfirmModal from './ConfirmModal'
 
 function ClientHome({ user }) {
     const [projects, setProjects] = useState([])
